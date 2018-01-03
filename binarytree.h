@@ -11,6 +11,9 @@ private:
 public:
     binarytree();
     binarytree(student *rootNode);
+
+    // search students by id
+    void searchByID(int studentID);
 };
 
 #endif // BINARYTREE_H
