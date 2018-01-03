@@ -61,13 +61,13 @@ void student::setLeftChild(student *value)
 }
 // ============================================ constructors ================================================
 student::student() : studentID(0), grade(0), firstName(NULL),
-    lastName(NULL), leftChild(NULL), rightChild(NULL)
+    lastName(NULL)
 {
-
+    leftChild = nullptr;
+    rightChild = nullptr;
 }
 
-student::student(int ID) : studentID(ID), grade(0), firstName(NULL),
-    lastName(NULL), leftChild(NULL), rightChild(NULL)
+student::student(int ID) : studentID(ID), grade(0)
 {
 
 }

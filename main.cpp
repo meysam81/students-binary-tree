@@ -40,7 +40,12 @@ int main(int argc, char *argv[])
         default:
             break;
         }
-        cin.get();
+
+        // to hold the screen for showing the results
+        cout << "\nPress any key to continue...\n" << flush;
+        cin.ignore();
+        cin.ignore();
+
     } while (true);
     return 0;
 }

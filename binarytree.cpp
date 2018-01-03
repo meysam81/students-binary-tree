@@ -113,7 +113,7 @@ void binarytree::searchByID(int studentID)
         if (*p <= *q) // overloaded operator
             p = p->getLeftChild();
         else
-            p = p->getLeftChild();
+            p = p->getRightChild();
     }
 }
 // ============================================= question 2 ================================================
