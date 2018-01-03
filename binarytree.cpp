@@ -89,18 +89,23 @@ bool binarytree::addNode()
 // ============================================= question 1 ================================================
 void binarytree::searchByID(int studentID)
 {
+    if (root == nullptr)
+    {
+        cerr << "Tree is empty!\n";
+        return;
+    }
     student *p = root;
     student *q = new student(studentID);
     while(true)
     {
         if (*p == *q) // overloaded operator
         {
-            cout << *p;
+            cout << *p << endl;
             return;
         }
         if (p == nullptr)
         {
-            cout << "No such student found!\n";
+            cerr << "No such student found!\n";
             return;
         }
         if (*p <= *q) // overloaded operator
@@ -108,4 +113,36 @@ void binarytree::searchByID(int studentID)
         else
             p = p->getLeftChild();
     }
+}
+// ============================================= question 2 ================================================
+void binarytree::findBestStudent()
+{
+    if (root == nullptr)
+    {
+        cerr << "Tree is empty!\n";
+        return;
+    }
+    student *p = root;
+    while (true)
+    {
+        if (p->getRightChild() == nullptr)
+        {
+            cout << *p << endl;
+            return;
+        }
+        else
+            p = p->getRightChild();
+    }
+}
+// ============================================= question 3 ================================================
+void binarytree::printAllStudentsInfo(student *start)
+{
+    if (start == nullptr)
+        return;
+    student *p = start;
+    if (start->getLeftChild() != nullptr)
+        printAllStudentsInfo(start->getLeftChild());
+    cout << *p << endl;
+    if (start->getRightChild() != nullptr)
+        printAllStudentsInfo(start->getRightChild());
 }

@@ -2,6 +2,7 @@
 #define BINARYTREE_H
 
 #include "student.h"
+#include <vector>
 
 class binarytree
 {
@@ -21,9 +22,14 @@ public:
     // add node
     bool addNode();
 
-
     // search students by id
     void searchByID(int studentID);
+
+    // find the best student
+    void findBestStudent();
+
+    // print students info
+    void printAllStudentsInfo(student *start);
 };
 
 #endif // BINARYTREE_H
