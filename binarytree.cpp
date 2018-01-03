@@ -12,7 +12,20 @@ binarytree::binarytree(student *rootNode) : root(rootNode), numberOfNodes(0)
 // ============================================== add node =================================================
 bool binarytree::notExist(student *find)
 {
-
+    if (root == nullptr)
+        return false;
+    student *p = root;
+    while (true)
+    {
+        if (p == nullptr)
+            return true;
+        if (p < find)
+            p = p->getLeftChild();
+        else if (find < p)
+            p = p->getRightChild();
+        else
+            return false;
+    }
 }
 bool binarytree::addNode()
 {
@@ -40,7 +53,30 @@ bool binarytree::addNode()
         student *p = new student(studentID, grade, firstName, lastName, nullptr, nullptr);
         if (notExist(p))
         {
-
+            student *q = root;
+            while (true)
+            {
+                if (p < q)
+                {
+                    if (q->getLeftChild() == nullptr)
+                    {
+                        q->setLeftChild(p);
+                        return true;
+                    }
+                    else
+                        q = q->getLeftChild();
+                }
+                else if (q < p)
+                {
+                    if (q->getRightChild() == nullptr)
+                    {
+                        q->setRightChild(p);
+                        return true;
+                    }
+                    else
+                        q = q->getLeftChild();
+                }
+            }
         }
         else
         {
