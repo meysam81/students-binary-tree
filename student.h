@@ -11,6 +11,10 @@ private:
 public:
     student();
     student(int ID, student* leftChild, student* rightChild);
+
+    int getData() const;
+
+    bool operator < (student secondStudent);
 };
 
 #endif // STUDENT_H
