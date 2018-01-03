@@ -30,6 +30,9 @@ public:
 
     // print students info
     void printAllStudentsInfo(student *start);
+
+    // print failed students info
+    void printFailedStudentsInfo(student *start);
 };
 
 #endif // BINARYTREE_H

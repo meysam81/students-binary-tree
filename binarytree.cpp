@@ -36,7 +36,7 @@ bool binarytree::addNode()
 
     cout << "Enter Student ID: ";
     cin >> studentID;
-    cout << "Enter Student Grade: ";
+    cout << "Enter Student Grade (0-20): ";
     cin >> grade;
     cout << "Enter Student First Name: ";
     cin >> firstName;
@@ -146,3 +146,17 @@ void binarytree::printAllStudentsInfo(student *start)
     if (start->getRightChild() != nullptr)
         printAllStudentsInfo(start->getRightChild());
 }
+// ============================================= question 4 ================================================
+void binarytree::printFailedStudentsInfo(student *start)
+{
+    if (start == nullptr)
+        return;
+    student *p = start;
+    if (start->getLeftChild() != nullptr)
+        printAllStudentsInfo(start->getLeftChild());
+    if (p->getGrade() < 10)
+        cout << *p << endl;
+    if (start->getRightChild() != nullptr)
+        printAllStudentsInfo(start->getRightChild());
+}
+
