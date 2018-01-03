@@ -19,6 +19,7 @@ private:
 public:
     // constructor
     student();
+    student(int ID);
     student(int ID, int grade,
             string firstName, string lastName,
             student* leftChild, student* rightChild);
@@ -36,7 +37,8 @@ public:
     void setLeftChild(student *value);
 
     // comparison operator overloading
-    bool operator < (student secondStudent);
+    bool operator <= (student &secondStudent);
+    bool operator == (student &secondStudent);
 
     // just a declaration of toString method
     friend ostream &operator <<(ostream& output, student& std);

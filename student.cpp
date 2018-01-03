@@ -1,9 +1,14 @@
 #include "student.h"
 
 // ============================================= comparison =================================================
-bool student::operator <(student secondStudent)
+bool student::operator <= (student &secondStudent)
 {
-    return (this->getStudentID() < secondStudent.getStudentID());
+    return (this->getStudentID() <= secondStudent.getStudentID());
+}
+
+bool student::operator ==(student &secondStudent)
+{
+    return (this->getStudentID() == secondStudent.getStudentID());
 }
 // ============================================== toString ==================================================
 ostream& operator <<(ostream &output, student &std)
@@ -55,7 +60,14 @@ void student::setLeftChild(student *value)
     leftChild = value;
 }
 // ============================================ constructors ================================================
-student::student() : studentID(0), leftChild(nullptr), rightChild(nullptr)
+student::student() : studentID(0), grade(0), firstName(NULL),
+    lastName(NULL), leftChild(NULL), rightChild(NULL)
+{
+
+}
+
+student::student(int ID) : studentID(ID), grade(0), firstName(NULL),
+    lastName(NULL), leftChild(NULL), rightChild(NULL)
 {
 
 }
