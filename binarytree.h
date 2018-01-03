@@ -2,18 +2,20 @@
 #define BINARYTREE_H
 
 #include "student.h"
-#include <vector>
 
 class binarytree
 {
 private:
     student *root;
-    int numberOfNodes;
-
 
     // node uniqueness
     bool notExist(student *find);
 
+    // print students info
+    void printAllInfo(student *start);
+
+    // print failed students info
+    void printFailedStudentsInfo(student *start);
 public:
     // constructors
     binarytree();
@@ -28,11 +30,11 @@ public:
     // find the best student
     void findBestStudent();
 
-    // print students info
-    void printAllStudentsInfo(student *start);
+    // print all info HELPER
+    void printAllStudentsInfo();
 
     // print failed students info
-    void printFailedStudentsInfo(student *start);
+    void printFailedInfo();
 };
 
 #endif // BINARYTREE_H

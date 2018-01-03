@@ -1,11 +1,11 @@
 #include "binarytree.h"
 // ============================================ constructors ================================================
-binarytree::binarytree() : root(nullptr), numberOfNodes(0)
+binarytree::binarytree() : root(nullptr)
 {
 
 }
 
-binarytree::binarytree(student *rootNode) : root(rootNode), numberOfNodes(0)
+binarytree::binarytree(student *rootNode) : root(rootNode)
 {
 
 }
@@ -33,6 +33,8 @@ bool binarytree::addNode()
     int grade;
     string firstName;
     string lastName;
+
+    cout << "Adding a student...\n";
 
     cout << "Enter Student ID: ";
     cin >> studentID;
@@ -100,7 +102,7 @@ void binarytree::searchByID(int studentID)
     {
         if (*p == *q) // overloaded operator
         {
-            cout << *p << endl;
+            cout << *p;
             return;
         }
         if (p == nullptr)
@@ -127,7 +129,8 @@ void binarytree::findBestStudent()
     {
         if (p->getRightChild() == nullptr)
         {
-            cout << *p << endl;
+            if (p->getGrade() >= 17)
+                cout << *p;
             return;
         }
         else
@@ -135,28 +138,47 @@ void binarytree::findBestStudent()
     }
 }
 // ============================================= question 3 ================================================
-void binarytree::printAllStudentsInfo(student *start)
+void binarytree::printAllInfo(student *start)
 {
     if (start == nullptr)
         return;
     student *p = start;
     if (start->getLeftChild() != nullptr)
-        printAllStudentsInfo(start->getLeftChild());
-    cout << *p << endl;
+        printAllInfo(start->getLeftChild());
+    cout << *p;
     if (start->getRightChild() != nullptr)
-        printAllStudentsInfo(start->getRightChild());
+        printAllInfo(start->getRightChild());
+}
+
+void binarytree::printAllStudentsInfo()
+{
+    if (root == nullptr)
+    {
+        cerr << "Tree is empty.\n";
+        return;
+    }
+    this->printAllInfo(root);
 }
 // ============================================= question 4 ================================================
+void binarytree::printFailedInfo()
+{
+    if (root == nullptr)
+    {
+        cerr << "Tree is empty.\n";
+        return;
+    }
+    this->printFailedStudentsInfo(root);
+}
+
 void binarytree::printFailedStudentsInfo(student *start)
 {
     if (start == nullptr)
         return;
     student *p = start;
     if (start->getLeftChild() != nullptr)
-        printAllStudentsInfo(start->getLeftChild());
+        printFailedStudentsInfo(start->getLeftChild());
     if (p->getGrade() < 10)
-        cout << *p << endl;
+        cout << *p;
     if (start->getRightChild() != nullptr)
-        printAllStudentsInfo(start->getRightChild());
+        printFailedStudentsInfo(start->getRightChild());
 }
-
