@@ -9,6 +9,47 @@ binarytree::binarytree(student *rootNode) : root(rootNode), numberOfNodes(0)
 {
 
 }
+// ============================================== add node =================================================
+bool binarytree::notExist(student *find)
+{
+
+}
+bool binarytree::addNode()
+{
+    int studentID;
+    int grade;
+    string firstName;
+    string lastName;
+
+    cout << "Enter Student ID: ";
+    cin >> studentID;
+    cout << "Enter Student Grade: ";
+    cin >> grade;
+    cout << "Enter Student First Name: ";
+    cin >> firstName;
+    cout << "Enter Student Last Name: ";
+    cin >> lastName;
+
+    if (root == nullptr)
+    {
+        root = new student(studentID, grade, firstName, lastName, nullptr, nullptr);
+        return true;
+    }
+    else
+    {
+        student *p = new student(studentID, grade, firstName, lastName, nullptr, nullptr);
+        if (notExist(p))
+        {
+
+        }
+        else
+        {
+            cerr << "Student already exist in tree.\n";
+            return false;
+        }
+    }
+
+}
 // ============================================= question 1 ================================================
 void binarytree::searchByID(int studentID)
 {
