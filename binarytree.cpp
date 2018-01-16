@@ -69,6 +69,39 @@ bool binarytree::deleteStudent(int value, student *start)
     }
 
     student *p = new student(value);
+    if ((*p) == (*root)) // special case for root and for root ONLY
+    {
+        if ((root->leftChild == nullptr) && (root->rightChild == nullptr))
+        {
+            root = nullptr;
+            cout << "Student deleted successfully!\n";
+            return true;
+        }
+        else if (root->leftChild != nullptr)
+        {
+            student *tmp = root;
+            root = root->leftChild;
+            tmp = nullptr;
+            cout << "Student deleted successfully!\n";
+            return true;
+        }
+        else if (root->rightChild != nullptr)
+        {
+            student *tmp = root;
+            root = root->rightChild;
+            tmp = nullptr;
+            cout << "Student deleted successfully!\n";
+            return true;
+        }
+        else
+        {
+            student *tmp = root->rightChild;
+            while (tmp->leftChild != nullptr)
+                tmp = tmp->leftChild;
+            (*root) = (*tmp);
+            return deleteStudent(tmp->studentID);
+        }
+    }
     student *q = start;
     student *hold = q;
     while (true)
