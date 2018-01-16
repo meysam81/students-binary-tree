@@ -24,7 +24,7 @@ private:
 public:
     // constructor
     student(int ID = 0,
-            string firstName = NULL, string lastName = NULL,
+            string firstName = "", string lastName = "",
             int units = 0, int grade = 0,
             student *leftChild = nullptr, student *rightChild = nullptr);
 
