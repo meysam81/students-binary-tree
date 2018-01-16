@@ -28,6 +28,8 @@ public:
             int units = 0, int grade = 0,
             student *leftChild = nullptr, student *rightChild = nullptr);
 
+    ~student();
+
     // comparison operator overloading
     bool operator < (student &secondStudent);
     bool operator > (student &secondStudent);

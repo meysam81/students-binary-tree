@@ -41,11 +41,19 @@ istream &operator >>(istream &input, student &std)
     input >> std.grade;
     return input;
 }
-// ============================================ constructors ================================================
+// ============================================ constructor ================================================
 student::student(int ID, string firstName, string lastName, int units, int grade,
                  student *leftChild, student *rightChild)
     : studentID(ID), firstName(firstName), lastName(lastName),
       units(units), grade(grade), leftChild(leftChild), rightChild(rightChild)
 {
     // nothing happens here!
+}
+// ============================================ destructor ================================================
+student::~student()
+{
+    leftChild = nullptr;
+    rightChild = nullptr;
+    delete leftChild;
+    delete rightChild;
 }
