@@ -3,77 +3,47 @@
 // ============================================= comparison =================================================
 bool student::operator <= (student &secondStudent)
 {
-    return (this->getStudentID() <= secondStudent.getStudentID());
+    return (this->studentID <= secondStudent.studentID);
+}
+
+bool student::operator >= (student &secondStudent)
+{
+    return (this->studentID >= secondStudent.studentID);
 }
 
 bool student::operator ==(student &secondStudent)
 {
-    return (this->getStudentID() == secondStudent.getStudentID());
+    return (this->studentID == secondStudent.studentID);
 }
 // ============================================== toString ==================================================
 ostream& operator <<(ostream &output, student &std)
 {
-    output << "Student ID: " << std.getStudentID() << endl
-           << "First Name: " << std.getFirstName() << endl
-           << "Last Name: " << std.getLastName()<< endl
-           << "Current Grade: " << std.getGrade() << endl;
+    output << "Student ID: " << std.studentID << endl
+           << "First Name: " << std.firstName << endl
+           << "Last Name: " << std.lastName<< endl
+           << "Current Grade: " << std.grade << endl;
     return output;
 }
-// =============================================== getters ==================================================
-int student::getStudentID() const
+// ============================================== inputStd ==================================================
+istream &operator >>(istream &input, student &std)
 {
-    return studentID;
-}
-
-int student::getGrade() const
-{
-    return grade;
-}
-
-string student::getFirstName() const
-{
-    return firstName;
-}
-
-string student::getLastName() const
-{
-    return lastName;
-}
-
-student *student::getLeftChild() const
-{
-    return leftChild;
-}
-
-student *student::getRightChild() const
-{
-    return rightChild;
-}
-// =============================================== setters ==================================================
-void student::setRightChild(student *value)
-{
-    rightChild = value;
-}
-
-void student::setLeftChild(student *value)
-{
-    leftChild = value;
+    cout << "First name: ";
+    input >> std.firstName;
+    cout << "Last name: ";
+    input >> std.lastName;
+    cout << "Units: ";
+    input >> std.units;
+    cout << "Grade: ";
+    input >> std.grade;
+    cout << "Student ID: ";
+    input >> std.studentID;
+    return input;
 }
 // ============================================ constructors ================================================
-student::student() : studentID(0), grade(0), firstName(NULL),
-    lastName(NULL)
+student::student(int ID, string firstName, string lastName, int units, int grade,
+                 student *leftChild, student *rightChild)
+    : studentID(ID), firstName(firstName), lastName(lastName),
+      units(units), grade(grade), leftChild(leftChild), rightChild(rightChild)
 {
-    leftChild = nullptr;
-    rightChild = nullptr;
-}
-
-student::student(int ID) : studentID(ID), grade(0)
-{
-
-}
-
-student::student(int ID, int grade, string firstName, string lastName, student *leftChild, student *rightChild)
-    : studentID(ID), grade(grade), firstName(firstName), lastName(lastName), leftChild(leftChild), rightChild(rightChild)
-{
-
+    // nothing happens here!
 }
