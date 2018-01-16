@@ -27,7 +27,7 @@ public:
     bool findBestStudent();
 
     // destructor
-    bool deleteStudent();
+    bool deleteStudent(int value, student *start = nullptr);
 
     // print students info
     void inorderTraverse(student *start = nullptr);

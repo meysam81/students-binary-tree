@@ -56,24 +56,20 @@ bool binarytree::addNode()
 
 }
 // =========================================== delete node =================================================
-bool binarytree::deleteStudent()
+bool binarytree::deleteStudent(int value, student *start)
 {
-    if (root == nullptr)
+    if (start == nullptr)
     {
-        cerr << "Tree is empty!\n";
-        return false;
+        if (root == nullptr)
+        {
+            cerr << "Tree is empty!\n";
+            return false;
+        }
+        return deleteStudent(value, root);
     }
-    cout << "Enter student ID to be deleted: ";
-    int id;
-    cin >> id;
-    student *p = new student(id);
-    if ((*p) == (*root))
-    {
-        root = nullptr;
-        cout << "Student deleted successfully!\n";
-        return true;
-    }
-    student *q = root;
+
+    student *p = new student(value);
+    student *q = start;
     student *hold = q;
     while (true)
     {
@@ -135,7 +131,12 @@ bool binarytree::deleteStudent()
             // get ready, cause here comes the hardest case: the last case
             else
             {
-
+                student *r = q;
+                r = r->rightChild;
+                while (r->leftChild != nullptr)
+                    r = r->leftChild;
+                (*q) = (*r);
+                return deleteStudent(r->studentID);
             }
         }
     }
