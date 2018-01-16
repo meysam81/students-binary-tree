@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
     binarytree bt;
     do
     {
-        system("cls"); // to clear the terminal for linux; change the argument to 'cls' for windows
+        system("clear"); // to clear the terminal for linux; change the argument to 'cls' for windows
         cout
                 << "1. Add a student\n"
                 << "2. Search a student by ID\n"
