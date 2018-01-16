@@ -3,12 +3,12 @@
 // ============================================= comparison =================================================
 bool student::operator < (student &secondStudent)
 {
-    return (this->studentID <= secondStudent.studentID);
+    return (this->studentID < secondStudent.studentID);
 }
 
 bool student::operator > (student &secondStudent)
 {
-    return (this->studentID >= secondStudent.studentID);
+    return (this->studentID > secondStudent.studentID);
 }
 
 bool student::operator ==(student &secondStudent)
