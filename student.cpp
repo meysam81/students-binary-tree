@@ -23,8 +23,6 @@ student &student::operator =(student &secondStudent)
     this->lastName = secondStudent.lastName;
     this->units = secondStudent.units;
     this->grade = secondStudent.grade;
-    this->leftChild = secondStudent.leftChild;
-    this->rightChild = secondStudent.rightChild;
     return (*this);
 }
 // ============================================== toString ==================================================
