@@ -28,7 +28,10 @@ int main(int argc, char *argv[])
             bt.searchByID(id);
             break;
         case 3:
-            bt.deleteStudent();
+            cout << "Enter student ID to be deleted: ";
+            id;
+            cin >> id;
+            bt.deleteStudent(id);
             break;
         case 4:
             bt.inorderTraverse();
