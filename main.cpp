@@ -5,36 +5,41 @@ int main(int argc, char *argv[])
     binarytree bt;
     do
     {
-        system("clear"); // to clear the terminal for linux; change the argument to 'cls' for windows
-        cout << "1. Search a student by ID\n"
-             << "2. Find the best student\n"
-             << "3. Print info of all students\n"
-             << "4. Print failed students\n"
-             << "5. [last but not least] add a student\n"
-             << "6. Exit\n\n"
-             << "Enter your choice: ";
+        system("cls"); // to clear the terminal for linux; change the argument to 'cls' for windows
+        cout
+                << "1. Add a student\n"
+                << "2. Search a student by ID\n"
+                << "3. Delete a student\n"
+                << "4. Inorder traverse\n"
+                << "5. Preorder traverse\n"
+                << "6. Postorder traverse\n"
+                << "7. Exit\n\n"
+                << "Enter your choice: ";
         int input;
         cin >> input;
         switch (input) {
         case 1:
+            bt.addNode();
+            break;
+        case 2:
             int id;
             cout << "\nEnter an id to search for: ";
             cin >> id;
             bt.searchByID(id);
             break;
-        case 2:
-            bt.findBestStudent();
-            break;
         case 3:
-            bt.printAllStudentsInfo();
+            bt.deleteStudent();
             break;
         case 4:
-            bt.printFailedInfo();
+            bt.inorderTraverse();
             break;
         case 5:
-            bt.addNode();
+            bt.preorderTraverse();
             break;
         case 6:
+            bt.postorderTraverse();
+            break;
+        case 7:
             exit(0);
             break;
         default:
