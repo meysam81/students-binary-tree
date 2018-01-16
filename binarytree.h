@@ -1,9 +1,10 @@
 #ifndef BINARYTREE_H
 #define BINARYTREE_H
 
-#include "student.h"
 
+#include "student.h"
 class student;
+
 
 class binarytree
 {
