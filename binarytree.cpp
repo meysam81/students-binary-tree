@@ -14,7 +14,15 @@ binarytree::~binarytree()
 bool binarytree::addNode()
 {
     student *p = new student();
-    cin >> (*p);
+    try
+    {
+        cin >> (*p);
+    }
+    catch (...)
+    {
+        cerr << "Enter correct input please!\n";
+        return false;
+    }
 
     if (root == nullptr)
     {
@@ -56,7 +64,7 @@ bool binarytree::addNode()
 
 }
 // =========================================== delete node =================================================
-bool binarytree::deleteStudent(int value, student *start)
+bool binarytree::deleteStudent(int value, student *start, student *startFather)
 {
     if (start == nullptr)
     {
@@ -69,6 +77,7 @@ bool binarytree::deleteStudent(int value, student *start)
     }
 
     student *p = new student(value);
+    student *hold;
     if ((*p) == (*root)) // special case for root and for root ONLY
     {
         if ((root->leftChild == nullptr) && (root->rightChild == nullptr))
@@ -77,7 +86,7 @@ bool binarytree::deleteStudent(int value, student *start)
             cout << "Student deleted successfully!\n";
             return true;
         }
-        else if (root->leftChild != nullptr)
+        else if (!(root->leftChild == nullptr) && (root->rightChild == nullptr))
         {
             student *tmp = root;
             root = root->leftChild;
@@ -85,7 +94,7 @@ bool binarytree::deleteStudent(int value, student *start)
             cout << "Student deleted successfully!\n";
             return true;
         }
-        else if (root->rightChild != nullptr)
+        else if ((root->leftChild == nullptr) && !(root->rightChild == nullptr))
         {
             student *tmp = root;
             root = root->rightChild;
@@ -96,14 +105,21 @@ bool binarytree::deleteStudent(int value, student *start)
         else
         {
             student *tmp = root->rightChild;
+            hold = root;
             while (tmp->leftChild != nullptr)
+            {
+                hold = tmp;
                 tmp = tmp->leftChild;
+            }
             (*root) = (*tmp);
-            return deleteStudent(tmp->studentID);
+            return deleteStudent(tmp->studentID, root->rightChild, hold);
         }
     }
     student *q = start;
-    student *hold = q;
+    if (startFather != nullptr)
+        hold = startFather;
+    else
+        hold = q;
     while (true)
     {
         if (q == nullptr)
@@ -137,7 +153,7 @@ bool binarytree::deleteStudent(int value, student *start)
             }
 
             // second case: node has one child
-            else if (q->leftChild != nullptr)
+            else if (!(q->leftChild == nullptr) && q->rightChild == nullptr)
             {
                 if (hold->leftChild == q)
                     hold->leftChild = q->leftChild;
@@ -149,7 +165,7 @@ bool binarytree::deleteStudent(int value, student *start)
                 return true;
             }
             // still second case
-            else if (q->rightChild != nullptr)
+            else if (q->leftChild == nullptr && !(q->rightChild == nullptr))
             {
                 if (hold->leftChild == q)
                     hold->leftChild = q->rightChild;
@@ -165,11 +181,15 @@ bool binarytree::deleteStudent(int value, student *start)
             else
             {
                 student *r = q;
+                hold = q;
                 r = r->rightChild;
                 while (r->leftChild != nullptr)
+                {
+                    hold = r;
                     r = r->leftChild;
+                }
                 (*q) = (*r);
-                return deleteStudent(r->studentID);
+                return deleteStudent(r->studentID, q->rightChild, hold);
             }
         }
     }
