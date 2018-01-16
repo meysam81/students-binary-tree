@@ -11,8 +11,10 @@ private:
     student *root; // head of the tree
 
 public:
-    // constructors
+    // constructor
     binarytree(student *rootNode = nullptr);
+    // destructor
+    ~binarytree();
 
     // add node
     bool addNode();
@@ -22,6 +24,9 @@ public:
 
     // find the best student
     bool findBestStudent();
+
+    // destructor
+    bool deleteStudent();
 
     // print students info
     void inorderTraverse(student *start = nullptr);
