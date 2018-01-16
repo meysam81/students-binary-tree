@@ -1,184 +1,119 @@
 #include "binarytree.h"
 // ============================================ constructors ================================================
-binarytree::binarytree() : root(nullptr)
-{
-
-}
-
 binarytree::binarytree(student *rootNode) : root(rootNode)
 {
 
 }
 // ============================================== add node =================================================
-bool binarytree::notExist(student *find)
-{
-    if (root == nullptr)
-        return false;
-    student *p = root;
-    while (true)
-    {
-        if (p == nullptr)
-            return true;
-        if (p < find)
-            p = p->getLeftChild();
-        else if (find < p)
-            p = p->getRightChild();
-        else
-            return false;
-    }
-}
 bool binarytree::addNode()
 {
-    int studentID;
-    int grade;
-    string firstName;
-    string lastName;
-
-    cout << "Adding a student...\n";
-
-    cout << "Enter Student ID: ";
-    cin >> studentID;
-    cout << "Enter Student Grade (0-20): ";
-    cin >> grade;
-    cout << "Enter Student First Name: ";
-    cin >> firstName;
-    cout << "Enter Student Last Name: ";
-    cin >> lastName;
+    student *p;
+    cin >> (*p);
 
     if (root == nullptr)
     {
-        root = new student(studentID, grade, firstName, lastName, nullptr, nullptr);
+        root = p;
         return true;
     }
     else
     {
-        student *p = new student(studentID, grade, firstName, lastName, nullptr, nullptr);
-        if (notExist(p))
+        student *q = root; // used for traversing
+        while (true)
         {
-            student *q = root;
-            while (true)
+            if ((*p) < (*q)) // new node is less than the current node
             {
-                if (p < q)
+                if ((q->leftChild) == nullptr) // we can add as left child
                 {
-                    if (q->getLeftChild() == nullptr)
-                    {
-                        q->setLeftChild(p);
-                        return true;
-                    }
-                    else
-                        q = q->getLeftChild();
+                    q->leftChild = p;
+                    return true;
                 }
-                else if (q < p)
+                else // go left and compare again
+                    q = q->leftChild;
+            }
+            else if ((*p) > (*q)) // new node is greater than the current node
+            {
+                if (q->rightChild == nullptr)
                 {
-                    if (q->getRightChild() == nullptr)
-                    {
-                        q->setRightChild(p);
-                        return true;
-                    }
-                    else
-                        q = q->getLeftChild();
+                    q->rightChild = p;
+                    return true;
                 }
+                else
+                    q = q->rightChild;
+            }
+            else // new node is equal to the current node and therefor we have a duplicate
+            {
+                cerr << "Student already exists in tree.\n";
+                return false;
             }
         }
-        else
-        {
-            cerr << "Student already exist in tree.\n";
-            return false;
-        }
     }
 
 }
-// ============================================= question 1 ================================================
-void binarytree::searchByID(int studentID)
+// ============================================ search tree ================================================
+bool binarytree::searchByID(int studentID)
 {
     if (root == nullptr)
     {
         cerr << "Tree is empty!\n";
-        return;
+        return false;
     }
-    student *p = root;
-    student *q = new student(studentID);
+    student *p = new student(studentID);
+    student *q = root;
     while(true)
     {
-        if (*p == *q) // overloaded operator
+        if (q == nullptr)
         {
-            cout << *p;
-            return;
+            cerr << "Not found\n";
+            return false;
         }
-        if (p == nullptr)
+        if ((*p) < (*q)) // overloaded operator
+            q = q->leftChild;
+        else if ((*p) > (*q)) // again overloaded operator
+            q = q->rightChild;
+        else if ((*p) == (*q)) // overloaded operator
+            // or just: else; no difference really
         {
-            cerr << "No such student found!\n";
-            return;
+            cout << (*p);
+            return true;
         }
-        if (*p <= *q) // overloaded operator
-            p = p->getLeftChild();
-        else
-            p = p->getRightChild();
     }
 }
-// ============================================= question 2 ================================================
-void binarytree::findBestStudent()
+// ========================================== show best student ============================================
+bool binarytree::findBestStudent()
 {
     if (root == nullptr)
     {
         cerr << "Tree is empty!\n";
-        return;
+        return false;
     }
-    student *p = root;
+    student *q = root;
     while (true)
     {
-        if (p->getRightChild() == nullptr)
+        if (q->rightChild == nullptr)
         {
-            if (p->getGrade() >= 17)
-                cout << *p;
-            return;
+            if (q->grade >= 17)
+            {
+                cout << (*q);
+                return true;
+            }
+            return false;
         }
         else
-            p = p->getRightChild();
+            q = q->rightChild;
     }
-}
-// ============================================= question 3 ================================================
-void binarytree::printAllInfo(student *start)
-{
-    if (start == nullptr)
-        return;
-    student *p = start;
-    if (start->getLeftChild() != nullptr)
-        printAllInfo(start->getLeftChild());
-    cout << *p;
-    if (start->getRightChild() != nullptr)
-        printAllInfo(start->getRightChild());
 }
 
-void binarytree::printAllStudentsInfo()
-{
-    if (root == nullptr)
-    {
-        cerr << "Tree is empty.\n";
-        return;
-    }
-    this->printAllInfo(root);
-}
-// ============================================= question 4 ================================================
-void binarytree::printFailedInfo()
-{
-    if (root == nullptr)
-    {
-        cerr << "Tree is empty.\n";
-        return;
-    }
-    this->printFailedStudentsInfo(root);
-}
-
-void binarytree::printFailedStudentsInfo(student *start)
+void binarytree::inorderTraverse(student *start)
 {
     if (start == nullptr)
+    {
+        inorderTraverse(root);
         return;
-    student *p = start;
-    if (start->getLeftChild() != nullptr)
-        printFailedStudentsInfo(start->getLeftChild());
-    if (p->getGrade() < 10)
-        cout << *p;
-    if (start->getRightChild() != nullptr)
-        printFailedStudentsInfo(start->getRightChild());
+    }
+    student *q = start;
+    if (start->leftChild != nullptr)
+        inorderTraverse(start->leftChild);
+    cout << (*q);
+    if (start->rightChild != nullptr)
+        inorderTraverse(start->rightChild);
 }

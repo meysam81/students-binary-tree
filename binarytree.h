@@ -3,38 +3,31 @@
 
 #include "student.h"
 
+class student;
+
 class binarytree
 {
 private:
-    student *root;
+    student *root; // head of the tree
 
-    // node uniqueness
-    bool notExist(student *find);
-
-    // print students info
-    void printAllInfo(student *start);
-
-    // print failed students info
-    void printFailedStudentsInfo(student *start);
 public:
     // constructors
-    binarytree();
-    binarytree(student *rootNode);
+    binarytree(student *rootNode = nullptr);
 
     // add node
     bool addNode();
 
     // search students by id
-    void searchByID(int studentID);
+    bool searchByID(int studentID);
 
     // find the best student
-    void findBestStudent();
+    bool findBestStudent();
 
-    // print all info HELPER
-    void printAllStudentsInfo();
+    // print students info
+    void inorderTraverse(student *start = nullptr);
+    void preorderTraverse(student *start = nullptr);
+    void postorderTraverse(student *start = nullptr);
 
-    // print failed students info
-    void printFailedInfo();
 };
 
 #endif // BINARYTREE_H
