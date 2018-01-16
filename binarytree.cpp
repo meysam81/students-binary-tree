@@ -55,6 +55,58 @@ bool binarytree::addNode()
     }
 
 }
+// =========================================== delete node =================================================
+bool binarytree::deleteStudent()
+{
+    if (root == nullptr)
+    {
+        cerr << "Tree is empty!\n";
+        return false;
+    }
+    cout << "Enter student ID to be deleted: ";
+    int id;
+    cin >> id;
+    student *p = new student(id);
+    student *q = root;
+    if ((*p) == (*q))
+    {
+        q = nullptr;
+        delete q;
+        cout << "Student deleted successfully!\n";
+        return true;
+    }
+    student *hold = q;
+    while (true)
+    {
+        if (q == nullptr)
+        {
+            cerr << "No such student found!\n";
+            return false;
+        }
+        if ((*p) < (*q))
+        {
+            hold = q;
+            q = q->leftChild;
+        }
+        else if ((*p) > (*q))
+        {
+            hold = q;
+            q = q->rightChild;
+        }
+        else if ((*p) == (*q))
+        {
+            if (hold->leftChild == q)
+                hold->leftChild = nullptr;
+            else if (hold->rightChild == q)
+                hold->rightChild = nullptr;
+            q = nullptr;
+            delete q;
+            cout << "Student deleted successfully!\n";
+            return true;
+        }
+    }
+
+}
 // ============================================ search tree ================================================
 bool binarytree::searchByID(int studentID)
 {
