@@ -13,7 +13,7 @@ binarytree::~binarytree()
 // ============================================== add node =================================================
 bool binarytree::addNode()
 {
-    student *p;
+    student *p = new student();
     cin >> (*p);
 
     if (root == nullptr)
@@ -67,14 +67,13 @@ bool binarytree::deleteStudent()
     int id;
     cin >> id;
     student *p = new student(id);
-    student *q = root;
-    if ((*p) == (*q))
+    if ((*p) == (*root))
     {
-        q = nullptr;
-        delete q;
+        root = nullptr;
         cout << "Student deleted successfully!\n";
         return true;
     }
+    student *q = root;
     student *hold = q;
     while (true)
     {
@@ -95,14 +94,49 @@ bool binarytree::deleteStudent()
         }
         else if ((*p) == (*q))
         {
-            if (hold->leftChild == q)
-                hold->leftChild = nullptr;
-            else if (hold->rightChild == q)
-                hold->rightChild = nullptr;
-            q = nullptr;
-            delete q;
-            cout << "Student deleted successfully!\n";
-            return true;
+            // first case: node is leaf
+            if (q->leftChild == nullptr && q->rightChild == nullptr)
+            {
+                if (hold->leftChild == q)
+                    hold->leftChild = nullptr;
+                else if (hold->rightChild == q)
+                    hold->rightChild = nullptr;
+                q = nullptr;
+                delete q;
+                cout << "Student deleted successfully!\n";
+                return true;
+            }
+
+            // second case: node has one child
+            else if (q->leftChild != nullptr)
+            {
+                if (hold->leftChild == q)
+                    hold->leftChild = q->leftChild;
+                else if (hold->rightChild == q)
+                    hold->rightChild = q->leftChild;
+                q = nullptr;
+                delete q;
+                cout << "Student deleted successfully!\n";
+                return true;
+            }
+            // still second case
+            else if (q->rightChild != nullptr)
+            {
+                if (hold->leftChild == q)
+                    hold->leftChild = q->rightChild;
+                else if (hold->rightChild == q)
+                    hold->rightChild = q->rightChild;
+                q = nullptr;
+                delete q;
+                cout << "Student deleted successfully!\n";
+                return true;
+            }
+
+            // get ready, cause here comes the hardest case: the last case
+            else
+            {
+
+            }
         }
     }
 
@@ -128,7 +162,8 @@ bool binarytree::searchByID(int studentID)
             q = q->leftChild;
         else if ((*p) > (*q)) // again overloaded operator
             q = q->rightChild;
-        else if ((*p) == (*q)) // overloaded operator
+        else
+            //            if ((*p) == (*q)) // overloaded operator
             // or just: else; no difference really
         {
             cout << (*p);
@@ -165,6 +200,11 @@ void binarytree::inorderTraverse(student *start)
 {
     if (start == nullptr)
     {
+        if (root == nullptr)
+        {
+            cerr << "Tree is empty!\n";
+            return;
+        }
         inorderTraverse(root);
         return;
     }
@@ -180,28 +220,38 @@ void binarytree::preorderTraverse(student *start)
 {
     if (start == nullptr)
     {
-        inorderTraverse(root);
+        if (root == nullptr)
+        {
+            cerr << "Tree is empty!\n";
+            return;
+        }
+        preorderTraverse(root);
         return;
     }
     student *q = start;
     cout << (*q);
     if (start->leftChild != nullptr)
-        inorderTraverse(start->leftChild);
+        preorderTraverse(start->leftChild);
     if (start->rightChild != nullptr)
-        inorderTraverse(start->rightChild);
+        preorderTraverse(start->rightChild);
 }
 
 void binarytree::postorderTraverse(student *start)
 {
     if (start == nullptr)
     {
-        inorderTraverse(root);
+        if (root == nullptr)
+        {
+            cerr << "Tree is empty!\n";
+            return;
+        }
+        postorderTraverse(root);
         return;
     }
     student *q = start;
     if (start->leftChild != nullptr)
-        inorderTraverse(start->leftChild);
+        postorderTraverse(start->leftChild);
     if (start->rightChild != nullptr)
-        inorderTraverse(start->rightChild);
+        postorderTraverse(start->rightChild);
     cout << (*q);
 }
