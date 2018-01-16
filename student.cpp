@@ -15,6 +15,18 @@ bool student::operator ==(student &secondStudent)
 {
     return (this->studentID == secondStudent.studentID);
 }
+// =========================================== copy instance ===============================================
+student &student::operator =(student &secondStudent)
+{
+    this->studentID = secondStudent.studentID;
+    this->firstName = secondStudent.firstName;
+    this->lastName = secondStudent.lastName;
+    this->units = secondStudent.units;
+    this->grade = secondStudent.grade;
+    this->leftChild = secondStudent.leftChild;
+    this->rightChild = secondStudent.rightChild;
+    return (*this);
+}
 // ============================================== toString ==================================================
 ostream& operator <<(ostream &output, student &std)
 {

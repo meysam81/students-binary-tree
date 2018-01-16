@@ -34,6 +34,7 @@ public:
     bool operator < (student &secondStudent);
     bool operator > (student &secondStudent);
     bool operator == (student &secondStudent);
+    student &operator =(student &secondStudent);
 
     // just a declaration of toString method
     friend ostream &operator <<(ostream& output, const student& std);
