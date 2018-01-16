@@ -1,12 +1,12 @@
 #include "student.h"
 
 // ============================================= comparison =================================================
-bool student::operator <= (student &secondStudent)
+bool student::operator < (student &secondStudent)
 {
     return (this->studentID <= secondStudent.studentID);
 }
 
-bool student::operator >= (student &secondStudent)
+bool student::operator > (student &secondStudent)
 {
     return (this->studentID >= secondStudent.studentID);
 }
@@ -18,10 +18,12 @@ bool student::operator ==(student &secondStudent)
 // ============================================== toString ==================================================
 ostream& operator <<(ostream &output, student &std)
 {
-    output << "Student ID: " << std.studentID << endl
-           << "First Name: " << std.firstName << endl
-           << "Last Name: " << std.lastName<< endl
-           << "Current Grade: " << std.grade << endl;
+    output
+            << "First Name: " << std.firstName << endl
+            << "Last Name: " << std.lastName<< endl
+            << "Student ID: " << std.studentID << endl
+            << "Grade: " << std.grade << endl
+            << "Current Grade: " << std.grade << endl;
     return output;
 }
 // ============================================== inputStd ==================================================
@@ -31,12 +33,12 @@ istream &operator >>(istream &input, student &std)
     input >> std.firstName;
     cout << "Last name: ";
     input >> std.lastName;
+    cout << "Student ID: ";
+    input >> std.studentID;
     cout << "Units: ";
     input >> std.units;
     cout << "Grade: ";
     input >> std.grade;
-    cout << "Student ID: ";
-    input >> std.studentID;
     return input;
 }
 // ============================================ constructors ================================================

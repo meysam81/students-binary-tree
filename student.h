@@ -29,8 +29,8 @@ public:
             student *leftChild = nullptr, student *rightChild = nullptr);
 
     // comparison operator overloading
-    bool operator <= (student &secondStudent);
-    bool operator >= (student &secondStudent);
+    bool operator < (student &secondStudent);
+    bool operator > (student &secondStudent);
     bool operator == (student &secondStudent);
 
     // just a declaration of toString method
