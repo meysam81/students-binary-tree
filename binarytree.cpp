@@ -102,7 +102,7 @@ bool binarytree::findBestStudent()
             q = q->rightChild;
     }
 }
-
+// ============================================== traverse =================================================
 void binarytree::inorderTraverse(student *start)
 {
     if (start == nullptr)
@@ -116,4 +116,34 @@ void binarytree::inorderTraverse(student *start)
     cout << (*q);
     if (start->rightChild != nullptr)
         inorderTraverse(start->rightChild);
+}
+
+void binarytree::preorderTraverse(student *start)
+{
+    if (start == nullptr)
+    {
+        inorderTraverse(root);
+        return;
+    }
+    student *q = start;
+    cout << (*q);
+    if (start->leftChild != nullptr)
+        inorderTraverse(start->leftChild);
+    if (start->rightChild != nullptr)
+        inorderTraverse(start->rightChild);
+}
+
+void binarytree::postorderTraverse(student *start)
+{
+    if (start == nullptr)
+    {
+        inorderTraverse(root);
+        return;
+    }
+    student *q = start;
+    if (start->leftChild != nullptr)
+        inorderTraverse(start->leftChild);
+    if (start->rightChild != nullptr)
+        inorderTraverse(start->rightChild);
+    cout << (*q);
 }
